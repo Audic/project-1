@@ -1,6 +1,6 @@
 create or replace function random_string(len int default 36)
 returns text
 as $$
-select upper(substring(md5(random()::text), 0, len+1));
+select upper(substr( encode(membership.gen_random_bytes(len /2 +1), 'hex'), 1, len ));
 $$ 
 language sql;
